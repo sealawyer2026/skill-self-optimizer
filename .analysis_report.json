@@ -1,0 +1,31 @@
+{
+  "skill_name": "skill-self-optimizer-v3.1",
+  "summary": {
+    "critical_issues": 0,
+    "errors": 0,
+    "warnings": 1,
+    "info": 0
+  },
+  "scores": {
+    "metadata": 100,
+    "content": 100,
+    "conciseness": 100,
+    "patterns": 100,
+    "overall": 100.0
+  },
+  "patterns_detected": {
+    "tool_wrapper": true,
+    "generator": true,
+    "reviewer": true,
+    "inversion": true,
+    "orchestrator": true
+  },
+  "issues": [
+    {
+      "level": "WARNING",
+      "issue": "Forbidden file found: README.md",
+      "suggestion": "Skills should not contain auxiliary documentation"
+    }
+  ],
+  "recommendations": []
+}
