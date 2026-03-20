@@ -1,0 +1,106 @@
+name: Skill Auto-Optimization
+
+on:
+  push:
+    paths:
+      - 'skills/**'
+  pull_request:
+    paths:
+      - 'skills/**'
+  schedule:
+    # Run weekly on Sundays at 00:00 UTC
+    - cron: '0 0 * * 0'
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    name: Analyze Skills
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        pip install pyyaml
+        
+    - name: Analyze all skills
+      run: |
+        python scripts/analyze_skill.py ./skills --strict
+        
+    - name: Upload analysis report
+      uses: actions/upload-artifact@v3
+      with:
+        name: analysis-report
+        path: ./skills/.analysis_report.json
+
+  optimize:
+    runs-on: ubuntu-latest
+    name: Auto-Optimize Skills
+    needs: analyze
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        pip install pyyaml
+        
+    - name: Batch optimize skills
+      run: |
+        python scripts/batch_optimize.py ./skills --output ./optimized --parallel
+        
+    - name: Upload optimized skills
+      uses: actions/upload-artifact@v3
+      with:
+        name: optimized-skills
+        path: ./optimized/
+
+  create-pr:
+    runs-on: ubuntu-latest
+    name: Create Optimization PR
+    needs: optimize
+    if: github.event_name == 'schedule'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Download optimized skills
+      uses: actions/download-artifact@v3
+      with:
+        name: optimized-skills
+        path: ./optimized/
+        
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'Auto-optimize skills via skill-self-optimizer'
+        title: '🚀 Automated Skill Optimization'
+        body: |
+          This PR contains automatically optimized skills using skill-self-optimizer.
+          
+          ## Changes
+          - Applied Google 5 design patterns
+          - Improved triggering conditions
+          - Enhanced quality scores
+          
+          ## How to Review
+          1. Check the optimization report in `./optimized/batch_optimization_report.html`
+          2. Review each optimized skill
+          3. Merge if satisfied
+        branch: auto/skill-optimization
+        delete-branch: true
