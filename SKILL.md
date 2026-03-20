@@ -1,8 +1,9 @@
 ---
 name: skill-self-optimizer
-description: "Meta-skill for fully automated skill optimization with real LLM integration. Use when: (1) Skill triggers incorrectly, (2) User reports issues, (3) Pre-ClawHub review, (4) Version iteration, (5) Applying Google's 5 design patterns, (6) Want fully automatic optimization pipeline, (7) Need pattern combination suggestions, (8) Choosing right design pattern, (9) Need real AI optimization, (10) Compare skill versions. Implements all 5 patterns with Web UI, Config, Templates, Performance & Dependency analysis."
-version: "3.3.0"
+description: "Meta-skill for fully automated skill optimization with real LLM integration. Use when: (1) Skill triggers incorrectly, (2) User reports issues, (3) Pre-ClawHub review, (4) Version iteration, (5) Applying Google's 5 design patterns, (6) Want fully automatic optimization pipeline, (7) Need pattern combination suggestions, (8) Choosing right design pattern, (9) Need real AI optimization, (10) Compare skill versions, (11) Need AI code generation, (12) Collect user feedback, (13) Migrate between platforms, (14) Run automated tests, (15) Monitor in production, (16) Analyze market trends. Implements all 5 patterns with Web UI, Config, Templates, Performance, Dependencies, AI Generation, Feedback Learning, Platform Migration, Auto Testing, Real-time Monitoring, and Market Analysis."
+version: "3.4.0"
 changelog:
+  - "3.4.0": Added AI Code Generator, Feedback Learner, Platform Migrator, Auto Tester, Real-time Monitor, Market Analyzer
   - "3.3.0": Added Web UI, Config Manager, Template Library, Performance Profiler, Dependency Analyzer
   - "3.2.0": Added real LLM optimizer, version diff comparison, HTML reports
   - "3.1.0": Added pattern combiner, decision tree, constraint analysis
@@ -174,6 +175,138 @@ Every Skill should leverage at least 2 patterns:
 - Minimum: One execution pattern (Wrapper/Generator) + one quality pattern (Reviewer/Inversion)
 - Ideal: All 5 patterns in harmony
 
+## v3.4 - AI Generation, Feedback, Migration, Testing, Monitoring & Market Analysis (NEW)
+
+全面增强版本，新增 6 大功能模块。
+
+### 🤖 AI Code Generator - AI 代码生成
+
+**根据自然语言描述自动生成完整 Skill：**
+
+```bash
+# 生成 Skill
+python scripts/ai_code_generator.py "create a skill for processing PDF files"
+
+# 指定输出目录和名称
+python scripts/ai_code_generator.py "处理 Excel 数据" --output ./my-skills --name excel-processor
+```
+
+**功能：**
+- 智能任务类型识别
+- 自动设计模式建议
+- 生成完整文件结构
+- 提供 TODO 清单
+
+### 🧠 Feedback Learner - 智能反馈学习
+
+**收集和分析用户反馈，持续改进 Skill：**
+
+```bash
+# 收集反馈
+python scripts/feedback_learner.py ./my-skill --collect --rating 4 --comment "Works well but slow"
+
+# 分析反馈
+python scripts/feedback_learner.py ./my-skill --analyze
+
+# 获取改进建议
+python scripts/feedback_learner.py ./my-skill --suggest
+```
+
+**输出：**
+- `.improvement_report.md` - 改进报告
+- `.feedback_analysis.json` - 分析数据
+- 自动识别常见问题类型
+
+### 🔄 Platform Migrator - 跨平台迁移
+
+**在 OpenClaw、Claude、GPT 之间迁移 Skill：**
+
+```bash
+# 迁移到 Claude
+python scripts/platform_migrator.py ./my-skill --target claude
+
+# 从 Claude 迁移到 OpenClaw
+python scripts/platform_migrator.py ./my-skill --source claude --target openclaw
+
+# 自动检测源平台
+python scripts/platform_migrator.py ./my-skill --target gpt
+```
+
+**支持平台：**
+- OpenClaw (SKILL.md + 脚本)
+- Claude (Markdown + XML 标签)
+- ChatGPT (JSON 格式)
+- OpenAI Assistants API
+
+### 🧪 Auto Tester - 自动化测试
+
+**自动生成和运行测试：**
+
+```bash
+# 生成测试
+python scripts/auto_tester.py ./my-skill --generate
+
+# 运行测试
+python scripts/auto_tester.py ./my-skill --run
+
+# 覆盖率报告
+python scripts/auto_tester.py ./my-skill --coverage
+```
+
+**测试类型：**
+- 触发条件测试
+- 示例验证测试
+- 校验规则测试
+- 结构完整性测试
+
+### 📊 Realtime Monitor - 实时监控
+
+**监控 Skill 在生产环境的表现：**
+
+```bash
+# 启动实时监控
+python scripts/realtime_monitor.py ./my-skill --start
+
+# 生成监控报告
+python scripts/realtime_monitor.py ./my-skill --report
+
+# 检查告警
+python scripts/realtime_monitor.py ./my-skill --alert
+```
+
+**监控指标：**
+- 调用成功率
+- 错误率
+- 平均延迟
+- 自动告警
+
+**告警阈值：**
+- 错误率 > 10%
+- 成功率 < 90%
+- 延迟 > 5000ms
+
+### 📈 Market Analyzer - 市场分析
+
+**分析 ClawHub 市场趋势：**
+
+```bash
+# 查看市场趋势
+python scripts/market_analyzer.py --trends
+
+# 与市场对标
+python scripts/market_analyzer.py --skill ./my-skill --compare
+
+# 生成完整报告
+python scripts/market_analyzer.py --report
+```
+
+**分析内容：**
+- 热门 Skill 类别
+- 设计模式趋势
+- 成功因素分析
+- 竞品对标建议
+
+## v3.3 - Web UI, Config, Templates, Performance & Dependencies
 ## v3.3 - Web UI, Config, Templates, Performance & Dependencies (NEW)
 
 全新的 Web 界面和 5 大增强功能。
